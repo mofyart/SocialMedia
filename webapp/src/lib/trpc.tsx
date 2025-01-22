@@ -1,8 +1,9 @@
+import type { TrpcRouter } from '@socialmedia/backend/src/trpc';
 import { createTRPCReact } from '@trpc/react-query';
-import { TrpcRouter } from '@socialmedia/backend/src/trpc';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { httpBatchLink } from '@trpc/client';
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const trpc = createTRPCReact<TrpcRouter>();
 
 const queryClient = new QueryClient({
