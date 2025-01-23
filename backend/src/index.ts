@@ -17,6 +17,6 @@ expressApp.use(
   })
 );
 
-expressApp.listen(3001, () => {
-  console.info('Перейдите в http://localhost:3001');
+expressApp.listen(3000, () => {
+  console.info('Перейдите в http://localhost:3000');
 });
