@@ -22,9 +22,6 @@ const users = [
     image: '.PDF',
   },
 ];
-if (Math.random()) {
-  console.info('efesf');
-}
 
 export const trpcRouter = trpc.router({
   getUser: trpc.procedure.query(() => {
