@@ -22,6 +22,7 @@ const users = [
     image: '.PDF',
   },
 ];
+const x:number = "aefewf";
 export const trpcRouter = trpc.router({
   getUser: trpc.procedure.query(() => {
     return { users };
