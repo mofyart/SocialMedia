@@ -23,8 +23,9 @@ const users = [
   },
 ];
 if (Math.random()) {
-  console.info();
+  console.info('efesf');
 }
+
 export const trpcRouter = trpc.router({
   getUser: trpc.procedure.query(() => {
     return { users };
