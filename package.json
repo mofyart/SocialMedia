@@ -9,7 +9,9 @@
     "lint": "concurrently  ' pnpm b lint' 'pnpm w lint'",
     "types": "concurrently  ' pnpm b types' 'pnpm w types'",
     "prettify": "pnpm -r --parallel prettify",
-    "prepair": "husky init"
+    "prepair": "husky init",
+    "prepare": "husky"
+
   },
   "devDependencies": {
     "concurrently": "^9.1.2",

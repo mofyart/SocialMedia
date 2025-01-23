@@ -23,6 +23,7 @@ const users = [
   },
 ];
 
+
 export const trpcRouter = trpc.router({
   getUser: trpc.procedure.query(() => {
     return { users };
