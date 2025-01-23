@@ -23,9 +23,6 @@ const users = [
   },
 ];
 
-if (Math.random()) {
-  console.info('sfsd');
-}
 export const trpcRouter = trpc.router({
   getUser: trpc.procedure.query(() => {
     return { users };
