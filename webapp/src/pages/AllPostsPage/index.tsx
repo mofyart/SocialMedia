@@ -14,16 +14,18 @@ export const AllPosts = () => {
   }
 
   return (
-    <div className = {css.users}>
+    <div className={css.users}>
       {data?.users.map((user) => {
         return (
-          <div className = {css.user} key={user.nickName}>
-            <h2 className = {css.userNickName}>
-              <Link className = {css.userLink} to={ViewUserProfileRoute({ nickName: user.nickName })}>{user.nickName}</Link>
+          <div className={css.user} key={user.nickName}>
+            <h2 className={css.userNickName}>
+              <Link className={css.userLink} to={ViewUserProfileRoute({ nickName: user.nickName })}>
+                {user.nickName}
+              </Link>
             </h2>
-            <p className ={css.image}>{user.image}</p>
-            <p className = {css.userDescryption}>{user.descryptionText}</p>
-            <p className = {css.postData}>{user.data}</p>
+            <p className={css.image}>{user.image}</p>
+            <p className={css.userDescryption}>{user.descryptionText}</p>
+            <p className={css.postData}>{user.data}</p>
           </div>
         )
       })}

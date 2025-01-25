@@ -20,14 +20,14 @@ export const ViewUserProfile = () => {
 
   return (
     <div>
-      <h1 className ={css.userNickName}>{data.user.nickName}</h1>
+      <h1 className={css.userNickName}>{data.user.nickName}</h1>
       <div>
-        <p className = {css.subscribes}>Subscribes: {data.user.subscribes}</p>
-        <p className = {css.subscriptions}>Subscriptions: {data.user.subscriptions}</p>
+        <p className={css.subscribes}>Subscribes: {data.user.subscribes}</p>
+        <p className={css.subscriptions}>Subscriptions: {data.user.subscriptions}</p>
         <div>
-          <p className = {css.iamge} >Image: {data.user.image}</p>
+          <p className={css.iamge}>Image: {data.user.image}</p>
         </div>
-        <div className = {css.text} dangerouslySetInnerHTML={{ __html: data.user.text }}></div>
+        <div className={css.text} dangerouslySetInnerHTML={{ __html: data.user.text }}></div>
       </div>
     </div>
   )
