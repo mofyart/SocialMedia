@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { Segment } from '../../components/Segment'
 import { ViewUserProfileRoute } from '../../lib/routes'
 import { trpc } from '../../lib/trpc'
 import css from './index.module.scss'
@@ -18,14 +19,18 @@ export const AllPosts = () => {
       {data?.users.map((user) => {
         return (
           <div className={css.user} key={user.nickName}>
-            <h2 className={css.userNickName}>
-              <Link className={css.userLink} to={ViewUserProfileRoute({ nickName: user.nickName })}>
-                {user.nickName}
-              </Link>
-            </h2>
-            <p className={css.image}>{user.image}</p>
-            <p className={css.userDescryption}>{user.descryptionText}</p>
-            <p className={css.postData}>{user.data}</p>
+            <Segment
+              title={
+                <Link className={css.userLink} to={ViewUserProfileRoute({ nickName: user.nickName })}>
+                  {user.nickName}
+                </Link>
+              }
+              size={2}
+              description={user.descryptionText}
+            >
+              <p className={css.image}>{user.image}</p>
+              <p className={css.postData}>{user.data}</p>
+            </Segment>
           </div>
         )
       })}

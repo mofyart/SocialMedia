@@ -1,10 +1,6 @@
 @import '../../styles/_vars.scss';
 @import '../../styles/_mixins.scss';
 
-.userNickName {
-  @include h1;
-  margin-bottom: 2px;
-}
 .subscribes {
   font-size: 10px;
 }

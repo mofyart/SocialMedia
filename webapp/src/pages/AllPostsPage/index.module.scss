@@ -9,14 +9,8 @@
     & + .user {
       margin-top: 20px;
     }
-    .userNickName {
-      @include h1;
-    }
     .userLink {
       @include link;
-    }
-    .userDescryption {
-      font-size: 18px;
     }
     .postData {
       font-size: 8px;
