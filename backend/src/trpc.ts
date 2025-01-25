@@ -11,7 +11,7 @@ const users = _.times(100, (i) => ({
   image: _.times(3, (j) => `<p>Iamge ${j} of data 21.01.2025...</p>`).join(''),
   subscribes: `${i}`,
   subscriptions: `${i + 50}`,
-  text: _.times(5, (j) => `<p>Text paragrph ${j} of user ${i}...</p>`).join(''),
+  text: _.times(3, (j) => `<p>Text paragrph ${j} of user ${i}...</p>`).join(''),
 }))
 
 export const trpcRouter = trpc.router({
