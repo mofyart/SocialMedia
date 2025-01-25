@@ -1,20 +1,20 @@
-@import '../../styles/_vars.scss';
-@import '../../styles/_mixins.scss';
+@import '../../styles/_vars';
+@import '../../styles/_mixins';
 
 .users {
   .user {
     padding: 20px;
     border: 1px solid $black;
     border-radius: 10px;
+
     & + .user {
       margin-top: 20px;
     }
+
     .userLink {
       @include link;
     }
-    .postData {
-      font-size: 8px;
-    }
+
     .postData {
       font-size: 12px;
     }
