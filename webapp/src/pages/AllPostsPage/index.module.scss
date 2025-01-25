@@ -1,0 +1,28 @@
+@import '../../styles/_vars.scss';
+@import '../../styles/_mixins.scss';
+
+.users {
+  .user {
+    padding: 20px;
+    border: 1px solid $black;
+    border-radius: 10px;
+    & + .user {
+      margin-top: 20px;
+    }
+    .userNickName {
+      @include h1;
+    }
+    .userLink {
+      @include link;
+    }
+    .userDescryption {
+      font-size: 18px;
+    }
+    .postData {
+        font-size: 8px;
+    }
+    .postData {
+        font-size: 12px;
+    }
+  }
+}

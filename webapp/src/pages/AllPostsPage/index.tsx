@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { ViewUserProfileRoute } from '../../lib/routes'
 import { trpc } from '../../lib/trpc'
+import css from './index.module.scss'
 
 export const AllPosts = () => {
   const { data, error, isLoading, isFetching, isError } = trpc.getUsers.useQuery()
@@ -13,15 +14,16 @@ export const AllPosts = () => {
   }
 
   return (
-    <div>
+    <div className = {css.users}>
       {data?.users.map((user) => {
         return (
-          <div key={user.nickName}>
-            <h2>
-              <Link to={ViewUserProfileRoute({ nickName: user.nickName })}>{user.nickName}</Link>
+          <div className = {css.user} key={user.nickName}>
+            <h2 className = {css.userNickName}>
+              <Link className = {css.userLink} to={ViewUserProfileRoute({ nickName: user.nickName })}>{user.nickName}</Link>
             </h2>
-            <p>{user.descryptionText}</p>
-            <p>{user.data}</p>
+            <p className ={css.image}>{user.image}</p>
+            <p className = {css.userDescryption}>{user.descryptionText}</p>
+            <p className = {css.postData}>{user.data}</p>
           </div>
         )
       })}

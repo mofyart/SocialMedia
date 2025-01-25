@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom'
 import { type typeViewUserProfileParams } from '../../lib/routes'
 import { trpc } from '../../lib/trpc'
+import css from './index.module.scss'
 
 export const ViewUserProfile = () => {
   const { nickName } = useParams() as typeViewUserProfileParams
@@ -19,14 +20,14 @@ export const ViewUserProfile = () => {
 
   return (
     <div>
-      <h1>{data.user.nickName}</h1>
+      <h1 className ={css.userNickName}>{data.user.nickName}</h1>
       <div>
-        <p>Subscribes: {data.user.subscribes}</p>
-        <p>Subscriptions: {data.user.subscriptions}</p>
+        <p className = {css.subscribes}>Subscribes: {data.user.subscribes}</p>
+        <p className = {css.subscriptions}>Subscriptions: {data.user.subscriptions}</p>
         <div>
-          <p>Image: {data.user.image}</p>
+          <p className = {css.iamge} >Image: {data.user.image}</p>
         </div>
-        <div dangerouslySetInnerHTML={{ __html: data.user.text }}></div>
+        <div className = {css.text} dangerouslySetInnerHTML={{ __html: data.user.text }}></div>
       </div>
     </div>
   )

@@ -1,0 +1,24 @@
+@import '../../styles/_vars.scss';
+@import '../../styles/_mixins.scss';
+
+.userNickName {
+  @include h1;
+  margin-bottom: 2px;
+}
+.subscribes {
+  font-size: 10px;
+}
+.subscriptions {
+  font-size: 10px;
+}
+.iamge {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+.text {
+  font-size: 14px;
+
+  & > *:not(:first-child) {
+    margin-top: 10px;
+  }
+}
