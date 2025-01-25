@@ -1,5 +1,5 @@
 import { Link, Outlet } from 'react-router-dom'
-import { AllPostsRoute } from '../../lib/routes'
+import { AddNewPostRoute, AllPostsRoute } from '../../lib/routes'
 import css from './index.module.scss'
 
 export const Layout = () => {
@@ -13,9 +13,14 @@ export const Layout = () => {
               All Posts
             </Link>
           </li>
+          <li className={css.item}>
+            <Link className={css.link} to={AddNewPostRoute()}>
+              Add new post
+            </Link>
+          </li>
         </ul>
       </div>
-      <div className = {css.content}>
+      <div className={css.content}>
         <Outlet />
       </div>
     </div>
