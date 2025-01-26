@@ -1,6 +1,6 @@
-import { getUserTrpcRoute } from './Routes/getUser'
-import { getUsersTrpcRoute } from './Routes/getUsers'
-import { trpc } from './lib/trpc'
+import { trpc } from '../lib/trpc'
+import { getUserTrpcRoute } from './getUser'
+import { getUsersTrpcRoute } from './getUsers'
 
 export const trpcRouter = trpc.router({
   getUser: getUserTrpcRoute,

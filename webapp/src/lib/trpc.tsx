@@ -1,4 +1,4 @@
-import type { TrpcRouter } from '@socialmedia/backend/src/trpc'
+import type { TrpcRouter } from '@socialmedia/backend/src/Routes'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { httpBatchLink } from '@trpc/client'
 import { createTRPCReact } from '@trpc/react-query'

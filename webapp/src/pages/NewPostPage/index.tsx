@@ -22,23 +22,7 @@ export const AddNewPost = () => {
         text: z.string().min(100, 'Text should be at least 100 characters long'),
       })
     ),
-    // validate: (values) => {
-    //   const errors: Partial<typeof values> = {}
-    //   if (!values.nickName) {
-    //     errors.nickName = 'Nickname is required'
-    //   } else if (!values.nickName.match(/^[a-z0-9-]+$/)) {
-    //     errors.nickName = 'Nickname can contain only lowercase letters, numbers and dashes'
-    //   }
-    //   if (!values.foto) {
-    //     errors.foto = 'Foto is required'
-    //   }
-    //   if (!values.text) {
-    //     errors.text = 'Text is required'
-    //   } else if (values.text.length < 100) {
-    //     errors.text = 'Text should be at least 100 characters long'
-    //   }
-    //   return errors
-    // },
+
     onSubmit: (values) => {
       console.info('Submitted', values)
     },
