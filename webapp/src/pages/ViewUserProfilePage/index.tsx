@@ -20,11 +20,9 @@ export const ViewUserProfile = () => {
   }
 
   return (
-    <Segment title={data.user.nickName}>
-      <p className={css.subscribes}>Subscribes: {data.user.subscribes}</p>
-      <p className={css.subscriptions}>Subscriptions: {data.user.subscriptions}</p>
+    <Segment title={data.user.nickName} description={data.user.descryption}>
       <div>
-        <p className={css.iamge}>Image: {data.user.image}</p>
+        <p className={css.iamge}>Image: {data.user.foto}</p>
       </div>
       <div className={css.text} dangerouslySetInnerHTML={{ __html: data.user.text }}></div>
     </Segment>

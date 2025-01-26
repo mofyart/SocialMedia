@@ -1,30 +1,25 @@
+import { zCreatePostTrpcInput } from '@socialmedia/backend/src/Routes/createPost/input'
 import { useFormik } from 'formik'
 import { withZodSchema } from 'formik-validator-zod'
-import { z } from 'zod'
 import { Input } from '../../components/Input/index'
 import { Segment } from '../../components/Segment'
 import { Textarea } from '../../components/Textarea/index'
+import { trpc } from '../../lib/trpc'
 
 export const AddNewPost = () => {
+  const createPost = trpc.createPost.useMutation()
+
   const formik = useFormik({
     initialValues: {
       nickName: '',
       foto: '',
+      descryption: '',
       text: '',
     },
-    validate: withZodSchema(
-      z.object({
-        nickName: z
-          .string()
-          .min(1, 'Nickname is required')
-          .regex(/^[a-z0-9-]+$/, 'Nickname can contain only lowercase letters, numbers and dashes'),
-        foto: z.string().min(1, 'Nickname is required'),
-        text: z.string().min(100, 'Text should be at least 100 characters long'),
-      })
-    ),
+    validate: withZodSchema(zCreatePostTrpcInput),
 
-    onSubmit: (values) => {
-      console.info('Submitted', values)
+    onSubmit: async (values) => {
+      await createPost.mutateAsync(values)
     },
   })
 
@@ -38,8 +33,10 @@ export const AddNewPost = () => {
       >
         <Input name="nickName" label="Nickname" formik={formik} />
         <Input name="foto" label="Foto" formik={formik} />
+        <Input name="descryption" label="Descryption" formik={formik} />
 
         <Textarea name="text" label="Text" formik={formik} />
+
         {!!formik.submitCount && !formik.isValid && <div style={{ color: 'red' }}>Some fiels are invalid</div>}
         <button type="submit">Add post</button>
       </form>

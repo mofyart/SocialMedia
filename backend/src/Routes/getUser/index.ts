@@ -1,6 +1,7 @@
 import { z } from 'zod'
+
+import { posts } from '../../lib/posts'
 import { trpc } from '../../lib/trpc'
-import { users } from '../../lib/users'
 
 export const getUserTrpcRoute = trpc.procedure
   .input(
@@ -9,6 +10,6 @@ export const getUserTrpcRoute = trpc.procedure
     })
   )
   .query(({ input }) => {
-    const user = users.find((user) => user.nickName === input.nickName)
+    const user = posts.find((post) => post.nickName === input.nickName)
     return { user: user || null }
   })

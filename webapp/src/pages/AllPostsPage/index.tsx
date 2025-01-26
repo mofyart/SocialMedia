@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Segment } from '../../components/Segment'
 import { ViewUserProfileRoute } from '../../lib/routes'
+
 import { trpc } from '../../lib/trpc'
 import css from './index.module.scss'
 
@@ -26,10 +27,9 @@ export const AllPosts = () => {
                 </Link>
               }
               size={2}
-              description={user.descryptionText}
+              description={user.descryption}
             >
-              <p className={css.image}>{user.image}</p>
-              <p className={css.postData}>{user.data}</p>
+              <p className={css.image}>{user.foto}</p>
             </Segment>
           </div>
         )
