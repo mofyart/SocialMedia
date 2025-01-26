@@ -1,21 +1,23 @@
-import { type ChangeEvent } from 'react'
+import { type FormikProps } from 'formik'
 
-export const Input = ({
-  name,
-  label,
-  state,
-  onChange,
-}: {
-  name: string
-  label: string
-  state: Record<string, any>
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void
-}) => {
+export const Input = ({ name, label, formik }: { name: string; label: string; formik: FormikProps<any> }) => {
+  const value = formik.values[name]
   return (
     <div style={{ marginBottom: 10 }}>
-      <label htmlFor={name}>{label}</label>
+      <label htmlFor={name}>
+        {label}
+        {value}
+      </label>
       <br />
-      <input type="text" value={state[name]} name={label} id={label} onChange={onChange} />
+      <input
+        type="text"
+        onChange={(e) => {
+          void formik.setFieldValue(name, e.target.value)
+        }}
+        value={value}
+        name={label}
+        id={label}
+      />
     </div>
   )
 }

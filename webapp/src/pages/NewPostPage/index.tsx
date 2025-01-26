@@ -1,34 +1,32 @@
-import { useState } from 'react'
+import { useFormik } from 'formik'
 import { Input } from '../../components/Input/index'
 import { Segment } from '../../components/Segment'
 import { Textarea } from '../../components/Textarea/index'
 
 export const AddNewPost = () => {
-  const [state, setState] = useState({
-    nickName: '',
-    foto: '',
-    text: '',
+  const formik = useFormik({
+    initialValues: {
+      nickName: '',
+      foto: '',
+      text: '',
+    },
+    onSubmit: (values) => {
+      console.info('Submitted', values)
+    },
   })
-
-  const onChangeName = (e: any) => {
-    setState({ ...state, nickName: e.target.value })
-  }
-  const onChangeFoto = (e: any) => {
-    setState({ ...state, foto: e.target.value })
-  }
 
   return (
     <Segment title="New post">
       <form
         onSubmit={(e) => {
           e.preventDefault()
-          console.info('Submitted', state)
+          formik.handleSubmit()
         }}
       >
-        <Input name="nickName" label="Nickname" state={state} onChange={onChangeName} />
-        <Input name="foto" label="Foto" state={state} onChange={onChangeFoto} />
+        <Input name="nickName" label="Nickname" formik={formik} />
+        <Input name="foto" label="Foto" formik={formik} />
 
-        <Textarea name="text" label="Text" state={state} setState={setState} />
+        <Textarea name="text" label="Text" formik={formik} />
 
         <button type="submit">Add post</button>
       </form>
