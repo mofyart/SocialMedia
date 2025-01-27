@@ -2,6 +2,9 @@ import { zCreatePostTrpcInput } from '@socialmedia/backend/src/Routes/createPost
 import { useFormik } from 'formik'
 import { withZodSchema } from 'formik-validator-zod'
 import { useState } from 'react'
+import { Alert } from '../../components/Alert'
+import { Button } from '../../components/Button'
+import { Formitems } from '../../components/Formitems'
 import { Input } from '../../components/Input/index'
 import { Segment } from '../../components/Segment'
 import { Textarea } from '../../components/Textarea/index'
@@ -46,19 +49,19 @@ export const AddNewPost = () => {
           formik.handleSubmit()
         }}
       >
-        <Input name="nickName" label="Nickname" formik={formik} />
-        <Input name="foto" label="Foto" formik={formik} />
-        <Input name="descryption" label="Descryption" formik={formik} />
+        <Formitems>
+          <Input name="nickName" label="Nickname" formik={formik} />
+          <Input name="foto" label="Foto" formik={formik} />
+          <Input name="descryption" label="Descryption" formik={formik} maxWidth={500} />
 
-        <Textarea name="text" label="Text" formik={formik} />
+          <Textarea name="text" label="Text" formik={formik} />
 
-        {!!formik.submitCount && !formik.isValid && <div style={{ color: 'red' }}>Some fiels are invalid</div>}
-        {!!submittingError && <div style={{ color: 'red' }}>{submittingError}</div>}
-        {successMessageVisible && <div style={{ color: 'green' }}>Post successful added</div>}
-        <button type="submit" disabled={formik.isSubmitting}>
-          {' '}
-          {formik.isSubmitting ? 'Submitting...' : 'Add post'}
-        </button>
+          {!!formik.submitCount && !formik.isValid && <Alert color="red">Some fields are invalid</Alert>}
+          {!!submittingError && <Alert color="red">{submittingError}</Alert>}
+          {successMessageVisible && <Alert color="green">Post successful added</Alert>}
+
+          <Button loading={formik.isSubmitting}>Add post</Button>
+        </Formitems>
       </form>
     </Segment>
   )
