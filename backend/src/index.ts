@@ -1,17 +1,27 @@
 import cors from 'cors'
 import express from 'express'
 import { trpcRouter } from './Routes'
+import { type AppContext, createAppContext } from './lib/ctx'
 import { ApplyTrpcToExpressApp } from './lib/trpc'
 
-const expressApp = express()
-expressApp.use(cors())
+void (async () => {
+  let ctx: AppContext | null = null
+  try {
+    ctx = createAppContext()
+    const expressApp = express()
+    expressApp.use(cors())
 
-expressApp.get('/ping', (req, res) => {
-  res.send('pong')
-})
+    expressApp.get('/ping', (req, res) => {
+      res.send('pong')
+    })
 
-ApplyTrpcToExpressApp(expressApp, trpcRouter)
+    ApplyTrpcToExpressApp(expressApp, ctx, trpcRouter)
 
-expressApp.listen(3000, () => {
-  console.info('Перейдите в http://localhost:3000')
-})
+    expressApp.listen(3000, () => {
+      console.info('Перейдите в http://localhost:3000')
+    })
+  } catch (error) {
+    console.error(error)
+    await ctx?.stop()
+  }
+})()

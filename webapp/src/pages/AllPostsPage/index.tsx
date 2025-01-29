@@ -17,17 +17,17 @@ export const AllPosts = () => {
 
   return (
     <div className={css.users}>
-      {data?.users.map((user) => {
+      {data?.posts.map((user) => {
         return (
-          <div className={css.user} key={user.nickName}>
+          <div className={css.user} key={user.namePost}>
             <Segment
               title={
-                <Link className={css.userLink} to={ViewUserProfileRoute({ nickName: user.nickName })}>
-                  {user.nickName}
+                <Link className={css.userLink} to={ViewUserProfileRoute({ namePost: user.namePost })}>
+                  {user.namePost}
                 </Link>
               }
               size={2}
-              description={user.descryption}
+              descryption={user.descryption}
             >
               <p className={css.image}>{user.foto}</p>
             </Segment>

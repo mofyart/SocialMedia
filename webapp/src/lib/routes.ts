@@ -6,6 +6,6 @@ export const AddNewPostRoute = () => '/users/new'
 
 export const AllPostsRoute = () => `/`
 
-export const ViewUserProfileParams = GetRouteParams({ nickName: true })
+export const ViewUserProfileParams = GetRouteParams({ namePost: true })
 export type typeViewUserProfileParams = typeof ViewUserProfileParams
-export const ViewUserProfileRoute = ({ nickName }: typeViewUserProfileParams) => `/users/${nickName}`
+export const ViewUserProfileRoute = ({ namePost }: typeViewUserProfileParams) => `/users/${namePost}`

@@ -21,3 +21,7 @@
     margin-top: 10px;
   }
 }
+
+.nickName {
+  @include h1;
+}
