@@ -9,10 +9,10 @@ export const getUserTrpcRoute = trpc.procedure
     })
   )
   .query(async ({ ctx, input }) => {
-    const user = await ctx.prisma.post.findUnique({
+    const post = await ctx.prisma.post.findUnique({
       where: {
         namePost: input.namePost,
       },
     })
-    return { user }
+    return { post }
   })

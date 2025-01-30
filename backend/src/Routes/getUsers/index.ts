@@ -5,8 +5,11 @@ export const getUsersTrpcRoute = trpc.procedure.query(async ({ ctx }) => {
     select: {
       id: true,
       namePost: true,
-      foto: true,
       descryption: true,
+      createdAt: true,
+    },
+    orderBy: {
+      createdAt: 'desc',
     },
   })
 

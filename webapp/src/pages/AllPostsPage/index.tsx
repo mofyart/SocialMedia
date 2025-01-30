@@ -28,9 +28,7 @@ export const AllPosts = () => {
               }
               size={2}
               descryption={user.descryption}
-            >
-              <p className={css.image}>{user.foto}</p>
-            </Segment>
+            ></Segment>
           </div>
         )
       })}
