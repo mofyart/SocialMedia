@@ -4,6 +4,7 @@ import * as routes from './lib/routes'
 import { TrpcProvider } from './lib/trpc'
 import { AllPosts } from './pages/AllPostsPage'
 import { AddNewPost } from './pages/NewPostPage'
+import { SignUp } from './pages/SignUpPage'
 import { ViewUserProfile } from './pages/ViewUserProfilePage'
 import './styles/global.scss'
 
@@ -13,6 +14,7 @@ export const App = () => {
       <BrowserRouter>
         <Routes>
           <Route element={<Layout />}>
+            <Route path={routes.SignUpRoute()} element={<SignUp />} />
             <Route path={routes.AllPostsRoute()} element={<AllPosts />} />
             <Route path={routes.AddNewPostRoute()} element={<AddNewPost />} />
             <Route path={routes.ViewUserProfileRoute(routes.ViewUserProfileParams)} element={<ViewUserProfile />} />

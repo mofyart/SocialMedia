@@ -4,7 +4,7 @@ import { withZodSchema } from 'formik-validator-zod'
 import { useState } from 'react'
 import { Alert } from '../../components/Alert'
 import { Button } from '../../components/Button'
-import { Formitems } from '../../components/Formitems'
+import { FormItems } from '../../components/Formitems'
 import { Input } from '../../components/Input/index'
 import { Segment } from '../../components/Segment'
 import { Textarea } from '../../components/Textarea/index'
@@ -50,7 +50,7 @@ export const AddNewPost = () => {
           formik.handleSubmit()
         }}
       >
-        <Formitems>
+        <FormItems>
           <Input name="namePost" label="Post name" formik={formik} />
           <Input name="nickName" label="Nickname" formik={formik} />
           <Input name="foto" label="Foto" formik={formik} />
@@ -63,7 +63,7 @@ export const AddNewPost = () => {
           {successMessageVisible && <Alert color="green">Post successful added</Alert>}
 
           <Button loading={formik.isSubmitting}>Add post</Button>
-        </Formitems>
+        </FormItems>
       </form>
     </Segment>
   )

@@ -9,3 +9,5 @@ export const AllPostsRoute = () => `/`
 export const ViewUserProfileParams = GetRouteParams({ namePost: true })
 export type typeViewUserProfileParams = typeof ViewUserProfileParams
 export const ViewUserProfileRoute = ({ namePost }: typeViewUserProfileParams) => `/users/${namePost}`
+
+export const SignUpRoute = () => '/sign-up'
