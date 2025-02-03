@@ -5,5 +5,5 @@ export const zSignUpTrpcInput = z.object({
     .string()
     .min(1, 'Nick required')
     .regex(/^[A-Za-z0-9-]+$/, 'Nick may contain only lowercase letters, numbers and dashes'),
-  password: z.string().min(1),
+  password: z.string().min(1, 'Password required'),
 })

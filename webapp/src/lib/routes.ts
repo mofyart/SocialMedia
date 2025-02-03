@@ -11,3 +11,7 @@ export type typeViewUserProfileParams = typeof ViewUserProfileParams
 export const ViewUserProfileRoute = ({ namePost }: typeViewUserProfileParams) => `/users/${namePost}`
 
 export const SignUpRoute = () => '/sign-up'
+
+export const SignInRoute = () => '/sign-in'
+
+export const SignOutRoute = () => '/sign-out'
