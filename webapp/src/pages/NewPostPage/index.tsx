@@ -18,7 +18,6 @@ export const AddNewPost = () => {
   const formik = useFormik({
     initialValues: {
       namePost: '',
-      nickName: '',
       foto: '',
       descryption: '',
       text: '',
@@ -52,7 +51,6 @@ export const AddNewPost = () => {
       >
         <FormItems>
           <Input name="namePost" label="Post name" formik={formik} />
-          <Input name="nickName" label="Nickname" formik={formik} />
           <Input name="foto" label="Foto" formik={formik} />
           <Input name="descryption" label="Descryption" formik={formik} maxWidth={500} />
 

@@ -7,7 +7,7 @@
 
 .createdAt {
   font-size: 12px;
-  margin-bottom: 10px;
+  margin-top: 10px;
 }
 
 .subscriptions {
@@ -27,6 +27,12 @@
   }
 }
 
-.nickName {
-  @include h1;
+.author {
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.editButton {
+  margin-top: 15px;
 }

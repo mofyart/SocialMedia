@@ -8,18 +8,20 @@ datasource db {
 }
 
 model User {
-    id       String   @id @default(uuid())
+    id        String   @id @default(uuid())
     nick      String   @unique
     password  String
     createdAt DateTime @default(now())
+    posts     Post[]
 }
 
 model Post {
     id          String @id @default(uuid())
     namePost    String @unique
-    nickName    String
     foto        String
     descryption String
     text        String
     createdAt   DateTime @default(now())
+    autrhorID   String
+    author      User     @relation(fields: [autrhorID], references: [id])
 }

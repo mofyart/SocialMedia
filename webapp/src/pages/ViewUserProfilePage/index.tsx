@@ -1,30 +1,46 @@
 import format from 'date-fns/format'
 import { useParams } from 'react-router-dom'
+import { LinkButton } from '../../components/Button'
 import { Segment } from '../../components/Segment'
-import { type typeViewUserProfileParams } from '../../lib/routes'
+import { EditPostRoute, type typeViewUserProfileParams } from '../../lib/routes'
 import { trpc } from '../../lib/trpc'
 import css from './index.module.scss'
 
 export const ViewUserProfile = () => {
   const { namePost } = useParams() as typeViewUserProfileParams
-  const { data, error, isLoading, isFetching, isError } = trpc.getUser.useQuery({ namePost })
-  if (isLoading || isFetching) {
+  const getMeResult = trpc.getMe.useQuery()
+  const getPostResult = trpc.getUser.useQuery({ namePost })
+
+  if (getPostResult.isLoading || getPostResult.isFetching || getMeResult.isLoading || getMeResult.isFetching) {
     return <span>Loading...</span>
   }
 
-  if (isError) {
-    return <span>Error: {error.message}</span>
+  if (getPostResult.isError) {
+    return <span>Error: {getPostResult.error.message}</span>
   }
 
-  if (!data?.post) {
-    return <span>Error: don`t find user</span>
+  if (getMeResult.isError) {
+    return <span>Error: {getMeResult.error.message}</span>
   }
+
+  if (!getPostResult.data.post) {
+    return <span>Post not found</span>
+  }
+
+  const me = getMeResult.data.me
+  const post = getPostResult.data.post
 
   return (
-    <Segment title={data.post.namePost} nick={data.post.nickName} descryption={data.post.descryption}>
-      <p className={css.iamge}>Image: {data.post.foto}</p>
-      <div className={css.createdAt}>Created At: {format(data.post.createdAt, 'yyyy-MM-dd')}</div>
-      <div className={css.text} dangerouslySetInnerHTML={{ __html: data.post.text }}></div>
+    <Segment title={post.namePost} descryption={post.descryption}>
+      <p className={css.iamge}>Image: {post.foto}</p>
+      <div className={css.author}>Author: {post.author.nick}</div>
+      <div className={css.text} dangerouslySetInnerHTML={{ __html: post.text }}></div>
+      <div className={css.createdAt}>Created At: {format(post.createdAt, 'yyyy-MM-dd')}</div>
+      {me?.id === post.autrhorID && (
+        <div className={css.editButton}>
+          <LinkButton to={EditPostRoute({ namePost: post.namePost })}>Edit Idea</LinkButton>
+        </div>
+      )}
     </Segment>
   )
 }

@@ -4,7 +4,7 @@ import { ExtractJwt, Strategy as JWTStrategy } from 'passport-jwt'
 import { type AppContext } from './ctx'
 import { env } from './env'
 
-export const applyPassportToExpressApp = (expressApp: Express, ctx: AppContext): void => {
+export const ApplyPassportToExpressApp = (expressApp: Express, ctx: AppContext): void => {
   const passport = new Passport()
 
   passport.use(
@@ -37,6 +37,9 @@ export const applyPassportToExpressApp = (expressApp: Express, ctx: AppContext):
       next()
       return
     }
-    passport.authenticate('jwt', { session: false })(req, res, next)
+    passport.authenticate('jwt', { session: false }, (...args: any[]) => {
+      req.user = args[1] || undefined
+      next()
+    })(req, res, next)
   })
 }
