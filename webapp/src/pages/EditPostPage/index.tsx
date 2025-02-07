@@ -1,9 +1,6 @@
 import type { TrpcRouterOutput } from '@socialmedia/backend/src/Routes'
 import { zUdatePostTrpcInput } from '@socialmedia/backend/src/Routes/updatePost/input'
-import { useFormik } from 'formik'
-import { withZodSchema } from 'formik-validator-zod'
 import { pick } from 'lodash'
-import { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Alert } from '../../components/Alert'
 import { Button } from '../../components/Button'
@@ -11,28 +8,27 @@ import { FormItems } from '../../components/Formitems'
 import { Input } from '../../components/Input'
 import { Segment } from '../../components/Segment'
 import { Textarea } from '../../components/Textarea'
+import { useMe } from '../../lib/ctx'
+import { useForm } from '../../lib/form'
 import { type typeEditPostParams, ViewUserProfileRoute } from '../../lib/routes'
 import { trpc } from '../../lib/trpc'
 
 const EditPostComponent = ({ post }: { post: NonNullable<TrpcRouterOutput['getUser']['post']> }) => {
   const navigate = useNavigate()
-  const [submittingError, setSubmittingError] = useState<string | null>(null)
   const updatePost = trpc.updatePost.useMutation()
 
-  const formik = useFormik({
+  const { formik, alertProps, buttonProps } = useForm({
     initialValues: pick(post, ['namePost', 'foto', 'descryption', 'text']),
 
-    validate: withZodSchema(zUdatePostTrpcInput.omit({ postID: true })),
+    validationSchema: zUdatePostTrpcInput.omit({ postID: true }),
 
     onSubmit: async (values) => {
-      try {
-        setSubmittingError(null)
-        await updatePost.mutateAsync({ postID: post.id, ...values })
-        await navigate(ViewUserProfileRoute({ namePost: values.namePost }))
-      } catch (error: any) {
-        setSubmittingError(error.message)
-      }
+      await updatePost.mutateAsync({ postID: post.id, ...values })
+      await navigate(ViewUserProfileRoute({ namePost: values.namePost }))
     },
+
+    resetOnSuccess: false,
+    showValidationAlert: true,
   })
 
   return (
@@ -43,9 +39,9 @@ const EditPostComponent = ({ post }: { post: NonNullable<TrpcRouterOutput['getUs
           <Input name="foto" label="Foto" formik={formik} />
           <Input name="descryption" label="Descryption" formik={formik} maxWidth={500} />
           <Textarea name="text" label="Text" formik={formik} />
-          {!!formik.submitCount && !formik.isValid && <Alert color="red">Some fields are invalid</Alert>}
-          {!!submittingError && <Alert color="red">{submittingError}</Alert>}
-          <Button loading={formik.isSubmitting}>Update post</Button>
+
+          <Alert {...alertProps} />
+          <Button {...buttonProps}>Update post</Button>
         </FormItems>
       </form>
     </Segment>
@@ -56,21 +52,16 @@ export const EditPost = () => {
   const { namePost } = useParams() as typeEditPostParams
 
   const getPostResult = trpc.getUser.useQuery({ namePost })
-  const getMeResult = trpc.getMe.useQuery()
+  const me = useMe()
 
-  if (getMeResult.isFetching || getMeResult.isLoading || getPostResult.isLoading || getPostResult.isFetching) {
+  if (getPostResult.isLoading || getPostResult.isFetching) {
     return <span>Loading...</span>
-  }
-
-  if (getMeResult.isError) {
-    return <span>Error: {getMeResult.error.message}</span>
   }
 
   if (getPostResult.isError) {
     return <span>Error: {getPostResult.error.message}</span>
   }
 
-  const me = getMeResult.data.me
   const post = getPostResult.data.post
 
   if (!me) {
